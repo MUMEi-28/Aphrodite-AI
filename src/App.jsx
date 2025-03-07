@@ -4,9 +4,15 @@ import Message from './components/Message'
 import Reply from './components/Reply'
 import SendMessage from './components/SendMessage'
 
+import { conversationData } from './data/conversationData'
+import { useState } from 'react'
 
 function App()
 {
+
+  const [conversation, setConversation] = useState([]);
+
+
   return (
 
     <div className='absolute min-w-screen bg-fuchsia-200 min-h-screen flex flex-col items-center justify-center'>
@@ -19,14 +25,8 @@ function App()
 
         <main className='flex flex-col flex-grow p-4 overflow-y-auto space-y-3'>
 
-          <Message text='Lorem ipsum, dolor sit amet consectetur adipisicing elit.' />
-          <Reply text='Officia voluptatum consequatur nemo accusamus!' />
-
-          <Message text='Perferendis rerum, dignissimos minus ea adipisci pariatur officiis repudiandae.' />
-          <Reply text='Voluptatem neque laborum, tempora vitae deleniti minus tenetur maiores? Maxime nesciunt eum nam.' />
-
-          <Message text='Doloremque, velit nesciunt?' />
-          <Reply text='Sed provident a sequi amet ab exercitationem, libero corporis nam molestiae id soluta nobis voluptatibus?' />
+          {conversationData.map((convo, index) => convo.category == "AI" ?
+            <Message text={convo.message} key={index} /> : <Reply text={convo.message} key={index} />)}
 
         </main>
 
