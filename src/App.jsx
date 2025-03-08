@@ -14,6 +14,7 @@ function App()
 {
 
   const [conversation, setConversation] = useState(conversationData);
+  const [initialGreetingAdded, setInitialGreetingAdded] = useState(false);
 
   // Scroll after sending messages
   const conversationEndRef = useRef(null);
@@ -22,58 +23,86 @@ function App()
     conversationEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [conversation]);
 
-
-  async function addMessage(formData)
+  // Add initial greeting from AI
+  useEffect(() =>
   {
-    /*     event.preventDefault();
-     */
+    if (!initialGreetingAdded)
+    {
+      async function fetchInitialGreeting()
+      {
+        try
+        {
+          const initialGreeting = await getRecipeFromMistral("This is the initial greeting, I want you to greet me and ask something");
+          setConversation(prevConvo => [
+            ...prevConvo,
+            { category: 'AI', message: initialGreeting || "Hi there! How can I make your day better today? 😊" }
+          ]);
+        } catch (error)
+        {
+          console.error("Error fetching initial greeting:", error);
+          setConversation(prevConvo => [
+            ...prevConvo,
+            { category: 'AI', message: "Hi there! How can I make your day better today? 😊" }
+          ]);
+        } finally
+        {
+          setInitialGreetingAdded(true);
+        }
+      }
+
+      fetchInitialGreeting();
+    }
+  }, [initialGreetingAdded]);
+
+  async function addMessage(event)
+  {
+    event.preventDefault();
+
+    const formData = new FormData(event.currentTarget);
     const userMessage = formData.get('message');
 
-
-    // If there is no value on message then stop executing
     if (!userMessage.trim()) return;
 
-    setConversation(function (prevConvo)
-    {
-      return [...prevConvo,
-      {
-        category: 'user',
-        message: userMessage
-      }
-      ]
-    })
+    setConversation(prevConvo => [
+      ...prevConvo,
+      { category: 'user', message: userMessage }
+    ]);
 
-    // Clear the input field after submission
-    event.target.reset();
+    event.currentTarget.reset();
 
-    // Get AI Response
-    try
-    {
-      const aiResponse = await getRecipeFromMistral([userMessage]); // Await the response
-      console.log("AI:", aiResponse);
-
-      setConversation(prevConvo => [
-        ...prevConvo,
-        {
-          category: "AI",
-          message: aiResponse || "I'm sorry, I couldn't generate a response."
-        }
-      ]);
-    } catch (error)
-    {
-      console.error("Error fetching AI response:", error);
-    }
-
-
-    /* // Simulate AI reply (replace with actual API later)
     setTimeout(() =>
     {
       setConversation(prevConvo => [
         ...prevConvo,
-        { category: 'AI', message: "I'm thinking... 🤔" }
+        { category: 'AI', message: "Typing..." }
       ]);
-    }, 300); // Simulate delay
- */
+
+      getAIResponse(userMessage);
+    }, 500);
+  }
+
+  async function getAIResponse(userMessage)
+  {
+    try
+    {
+      const aiResponse = await getRecipeFromMistral(userMessage);
+
+      setConversation(prevConvo => prevConvo.map((msg, index) =>
+        index === prevConvo.length - 1
+          ? { category: "AI", message: aiResponse || "I'm sorry, I couldn't generate a response." }
+          : msg
+      ));
+
+    } catch (error)
+    {
+      console.error("Error fetching AI response:", error);
+
+      setConversation(prevConvo => prevConvo.map((msg, index) =>
+        index === prevConvo.length - 1
+          ? { category: "AI", message: "Failed to fetch response. Please try again." }
+          : msg
+      ));
+    }
   }
 
 
@@ -88,6 +117,7 @@ function App()
         </header>
 
         <main className='flex flex-col flex-grow p-4 overflow-y-auto space-y-3'>
+
           {conversation.map((convo, index) =>
             convo.category === "user" ? (
               <Message key={index} text={convo.message} />
@@ -99,14 +129,11 @@ function App()
           <div ref={conversationEndRef} />
         </main>
 
-        <form action={addMessage} className='flex flex-row items-center p-2 border-t'
-
-        >
+        <form onSubmit={addMessage} className='flex flex-row items-center p-2 border-t'>
           <input type="text"
             className='border flex-grow p-2 rounded-full outline-none focus:ring-2 focus:ring-pink-400'
             placeholder='Type a message...'
             name='message'
-          /*   onChange={(e) => setConversation(e.target.value)} */
           />
           <button
             className='border ml-2 bg-pink-500 text-white px-4 py-2 rounded-full hover:bg-pink-700 transition'>
