@@ -23,15 +23,15 @@ function App()
   }, [conversation]);
 
 
-  function addMessage(formData)
+  async function addMessage(formData)
   {
-    event.preventDefault();
-
+    /*     event.preventDefault();
+     */
     const userMessage = formData.get('message');
 
 
     // If there is no value on message then stop executing
-    if (!message.trim()) return;
+    if (!userMessage.trim()) return;
 
     setConversation(function (prevConvo)
     {
@@ -43,10 +43,29 @@ function App()
       ]
     })
 
-    console.log(userMessage);
+    // Clear the input field after submission
+    event.target.reset();
+
+    // Get AI Response
+    try
+    {
+      const aiResponse = await getRecipeFromMistral([userMessage]); // Await the response
+      console.log("AI:", aiResponse);
+
+      setConversation(prevConvo => [
+        ...prevConvo,
+        {
+          category: "AI",
+          message: aiResponse || "I'm sorry, I couldn't generate a response."
+        }
+      ]);
+    } catch (error)
+    {
+      console.error("Error fetching AI response:", error);
+    }
 
 
-    // Simulate AI reply (replace with actual API later)
+    /* // Simulate AI reply (replace with actual API later)
     setTimeout(() =>
     {
       setConversation(prevConvo => [
@@ -54,7 +73,7 @@ function App()
         { category: 'AI', message: "I'm thinking... 🤔" }
       ]);
     }, 300); // Simulate delay
-
+ */
   }
 
 
