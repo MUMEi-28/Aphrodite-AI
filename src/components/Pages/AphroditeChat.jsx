@@ -10,6 +10,7 @@ import { useState, useEffect, useRef } from 'react';
 import { getRecipeFromChefClaude, getRecipeFromMistral } from "../../data/chat/ai"
 
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export default function AphroditeChat()
 {
@@ -140,7 +141,13 @@ export default function AphroditeChat()
                         Send
                     </button>
                 </form>
+
+
             </section>
+            <button
+                className='border mt-4 bg-pink-500 text-white px-8 py-4 rounded-full hover:bg-pink-700 transition'>
+                <Link to='/'>Back</Link>
+            </button>
 
             <footer className='absolute bottom-0 bg-pink-500 min-w-screen text-white text-lg text-center p-4'>
                 <p>Copyright {new Date().getFullYear()} by MJ.</p>

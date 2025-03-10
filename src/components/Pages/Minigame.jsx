@@ -3,6 +3,7 @@ import { useState } from 'react'
 import languages from "../../data/minigame/Messages.js"
 import { getFarewellText, getRandomWord } from "../../data/minigame/gameMessages.js"
 import Confetti from "react-confetti"
+import { Link } from 'react-router-dom'
 
 
 export default function Minigame()
@@ -19,8 +20,6 @@ export default function Minigame()
 
     const lastGuessLetter = guessedLetter[guessedLetter.length - 1]
     const islastGuessIncorrect = lastGuessLetter && !currentWord.includes(lastGuessLetter)
-
-    console.log(islastGuessIncorrect)
 
     const isGameOver = isGameLost || isGameWon
 
@@ -100,10 +99,10 @@ export default function Minigame()
  */}                    <section className='my-9'>
 
                         {
-                            currentWord.split("").map(function (letter)
+                            currentWord.split("").map(function (letter, index)
                             {
                                 return (
-                                    <span
+                                    <span key={index}
                                         className='text-xl uppercase bg-[#323232] text-white px-4 py-2 border-b-2 m-[0.1rem] size-[3rem]'
                                     >{guessedLetter.includes(letter) ? letter.split("") : ""}</span>
                                 )
@@ -137,11 +136,13 @@ export default function Minigame()
                                 onClick={function () { startNewGame() }}
                             >Play Again</button>
 
-                            <button className='bg-blue-400 text-black py-3 px-19 rounded-md border border-white mt-9 mb-19'
-                                onClick={function () { startNewGame() }}
-                            >Back</button>
                         </div>
                     }
+                    <Link to='/'>
+                        <button className='bg-blue-400 text-black py-3 px-19 rounded-md border border-white mt-9 mb-19'
+                        >Back</button>
+                    </Link >
+
                 </div>
 
             </div>
