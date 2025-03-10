@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { conversationData } from '../data/conversationData';
+import { conversationData } from '../../data/chat/conversationData';
 
 export default function SendMessage()
 {
