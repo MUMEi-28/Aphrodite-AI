@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 export default function HomePage()
 {
     return (
+
         <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-pink-500 via-red-400 to-purple-500 text-white">
             <h1 className="text-5xl font-bold mb-8 drop-shadow-lg">
                 💖 Aphrodite AI 💖
@@ -33,12 +34,13 @@ export default function HomePage()
                 </Link>
 
                 <Link
-                    to="/tarrots"
+                    to="/fortune-teller"
                     className="bg-white text-pink-600 px-6 py-3 text-lg font-semibold rounded-xl shadow-md transition-all duration-300 hover:bg-purple-200 hover:scale-105"
                 >
                     🔮 Reveal Your Love Fortune
                 </Link>
             </div>
         </div>
+
     );
 }
