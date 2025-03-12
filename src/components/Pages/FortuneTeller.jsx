@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import fortuneMessages from '../../data/fortuneTeller/fortuneMessages';
+import { Link } from 'react-router-dom';
 
 export default function FortuneTeller()
 {
@@ -78,18 +79,22 @@ export default function FortuneTeller()
                         {isPredicting ? 'Predicting...' : '💘 Reveal My Fortune 💘'}
                     </button>
 
-                    <a href="/"><button className=" px-8 py-3 font-bold rounded-full transition duration-300 shadow-lg bg-blue-500 hover:bg-blue-600 text-white">Go Back</button></a>
+                    <button className=" px-8 py-3 font-bold rounded-full transition duration-300 shadow-lg bg-blue-500 hover:bg-blue-600 text-white"><Link to='..'>Go Back</Link>
+                    </button>
+
 
                 </div>
 
 
             </div>
-            {fortune && (
-                <p className=" mt-6 text-xl font-semibold text-pink-800 italic transition-opacity duration-500 bg-white p-4 rounded-lg shadow-md border border-pink-300">
-                    "{fortune}"
-                </p>
-            )}
-        </div>
+            {
+                fortune && (
+                    <p className=" mt-6 text-xl font-semibold text-pink-800 italic transition-opacity duration-500 bg-white p-4 rounded-lg shadow-md border border-pink-300">
+                        "{fortune}"
+                    </p>
+                )
+            }
+        </div >
 
     );
 }
