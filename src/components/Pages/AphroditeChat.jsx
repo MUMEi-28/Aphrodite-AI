@@ -146,7 +146,7 @@ export default function AphroditeChat()
             </section>
             <button
                 className='border mt-4 bg-pink-500 text-white px-8 py-4 rounded-full hover:bg-pink-700 transition'>
-                <Link to='/'>Back</Link>
+                <Link to='..'>Back</Link>
             </button>
 
             <footer className='absolute bottom-0 bg-pink-500 min-w-screen text-white text-lg text-center p-4'>
