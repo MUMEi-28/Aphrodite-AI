@@ -46,14 +46,24 @@ export default function HomePage()
 
             <footer className='absolute bottom-0 w-full text-white text-center p-4 shadow-md'>
                 <p className="text-sm">
-                    &copy; {new Date().getFullYear()} by MJ. All rights reserved.
+                    &copy; {new Date().getFullYear()} MJ. Open-source under the <a
+                        href="https://opensource.org/licenses/MIT"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="underline hover:text-gray-300 transition">
+                        MIT License
+                    </a>.
                 </p>
                 <p className="mt-1 text-xs">
-                    <a href="https://github.com/MUMEi-28/Aphrodite-AI" target="_blank" rel="noopener noreferrer" className="underline hover:text-gray-300 transition">
+                    <a href="https://github.com/MUMEi-28/Aphrodite-AI"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="underline hover:text-gray-300 transition">
                         View on GitHub
                     </a>
                 </p>
             </footer>
+
         </div>
     );
 }
