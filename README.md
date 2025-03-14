@@ -1,6 +1,6 @@
 # Aphrodite AI 💖
 
-Aphrodite AI is a fun and interactive AI-powered love assistant that brings romance, entertainment, and fortune-telling into one engaging platform. Whether you want to chat with Aphrodite, play a romantic-themed Hangman game, or discover your love fortune, this project has something for you!
+Aphrodite AI is a fun and interactive AI-powered love assistant that brings romance, entertainment, and fortune-telling into one engaging platform. Whether you want to chat with Aphrodite, play a romantic-themed Hangman game (not really...), or discover your love fortune, this project has something for you!
 
 ## 🌟 Features
 
@@ -36,19 +36,26 @@ View the competition details [here](https://www.facebook.com/share/p/19JN6vvp93/
 
 ## 📸 Screenshots
 
+### Homapage
+![image](https://github.com/user-attachments/assets/82ac0f4e-f3e6-469d-b12f-c7235eee073e)
+
 ### ChatBot
-![ChatBot Screenshot](screenshots/chatbot.png)
+![image](https://github.com/user-attachments/assets/37da7251-8643-4e3c-9270-88d44d9137a3)
 
 ### Hangman Game
-![Hangman Game Screenshot](screenshots/hangman.png)
+![image](https://github.com/user-attachments/assets/1c883947-7e33-4d37-b30b-d3676cc20308)
+![image](https://github.com/user-attachments/assets/3d1c1256-b113-4d26-8148-46a743906832)
+![image](https://github.com/user-attachments/assets/482c6dde-4bdb-4408-923c-e3a2c80061bf)
+![image](https://github.com/user-attachments/assets/c7254dd0-e46b-4916-b152-f3a2f136ec11)
 
 ### Love Fortune Teller
-![Love Fortune Teller Screenshot](screenshots/fortune.png)
-
+![image](https://github.com/user-attachments/assets/dcd7daab-291f-4d0a-805b-4107ec532ed8)
+![image](https://github.com/user-attachments/assets/4ae10d5c-000f-402b-999e-09c67e69fcb7)
+![image](https://github.com/user-attachments/assets/60d0e63b-9ec1-44ef-8d8f-f37c6ea8c7bf)
 
 ## 💡 Future Improvements
 
-I would have love to add more features like **freedom wall** but nahh got too lazy and deadline is like in 4hrs and I havent deployed it yet soooo.
+I would have love to add more features like **freedom wall** but nahh got too lazy and deadline is like in 4hrs and I havent deployed it yet soooo. (even though not on the event guidelines) 
 
 ## 📜 License
 
