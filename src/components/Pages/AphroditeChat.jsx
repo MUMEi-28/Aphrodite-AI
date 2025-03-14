@@ -7,7 +7,7 @@ import SendMessage from '../chat/SendMessage'
 import { conversationData } from '../../data/chat/conversationData'
 import { useState, useEffect, useRef } from 'react';
 
-import { getRecipeFromChefClaude, getRecipeFromMistral } from "../../data/chat/ai"
+import { getResponseFromMistral } from "../../data/chat/ai"
 
 import React from 'react'
 import { Link } from 'react-router-dom'
@@ -33,7 +33,7 @@ export default function AphroditeChat()
             {
                 try
                 {
-                    const initialGreeting = await getRecipeFromMistral("This is the initial greeting, I want you to greet me and ask something");
+                    const initialGreeting = await getResponseFromMistral("This is the initial greeting, I want you to greet me and ask something");
                     setConversation(prevConvo => [
                         ...prevConvo,
                         { category: 'AI', message: initialGreeting || "Hi there! How can I make your day better today? 😊" }
@@ -86,7 +86,7 @@ export default function AphroditeChat()
     {
         try
         {
-            const aiResponse = await getRecipeFromMistral(userMessage);
+            const aiResponse = await getResponseFromMistral(userMessage);
 
             setConversation(prevConvo => prevConvo.map((msg, index) =>
                 index === prevConvo.length - 1
@@ -108,17 +108,13 @@ export default function AphroditeChat()
 
 
     return (
-
-        <div className='absolute min-w-screen bg-fuchsia-200 min-h-screen flex flex-col items-center justify-center'>
-
-            <section className="border bg-white w-96 h-[600px] flex flex-col shadow-lg rounded-lg overflow-hidden">
-                <header className="bg-pink-500 text-white p-4 flex items-center justify-center text-2xl font-bold">
-                    <h1>Aphrodite</h1>
+        <div className='absolute min-w-screen min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-pink-600 via-purple-500 to-red-500'>
+            <section className="border bg-white w-96 h-[600px] flex flex-col shadow-xl rounded-2xl overflow-hidden">
+                <header className="bg-gradient-to-r from-red-500 via-pink-500 to-purple-500 text-white p-4 flex items-center justify-center text-2xl font-bold">
+                    <h1>Aphrodite AI</h1>
                     <box-icon name="bot" className="ml-2"></box-icon>
                 </header>
-
                 <main className='flex flex-col flex-grow p-4 overflow-y-auto space-y-3'>
-
                     {conversation.map((convo, index) =>
                         convo.category === "user" ? (
                             <Message key={index} text={convo.message} />
@@ -126,11 +122,9 @@ export default function AphroditeChat()
                             <Reply key={index} text={convo.message} />
                         )
                     )}
-
                     <div ref={conversationEndRef} />
                 </main>
-
-                <form onSubmit={addMessage} className='flex flex-row items-center p-2 border-t'>
+                <form onSubmit={addMessage} className='flex flex-row items-center p-2 border-t bg-gray-100'>
                     <input type="text"
                         className='border flex-grow p-2 rounded-full outline-none focus:ring-2 focus:ring-pink-400'
                         placeholder='Type a message...'
@@ -141,20 +135,15 @@ export default function AphroditeChat()
                         Send
                     </button>
                 </form>
-
-
             </section>
             <button
                 className='border mt-4 bg-pink-500 text-white px-8 py-4 rounded-full hover:bg-pink-700 transition'>
                 <Link to='..'>Back</Link>
             </button>
 
-            <footer className='absolute bottom-0 bg-pink-500 min-w-screen text-white text-lg text-center p-4'>
-                <p>Copyright {new Date().getFullYear()} by MJ.</p>
-            </footer>
+
 
         </div>
-
-    )
+    );
 
 }
