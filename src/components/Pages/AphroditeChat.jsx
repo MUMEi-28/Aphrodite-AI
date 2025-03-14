@@ -7,7 +7,7 @@ import SendMessage from '../chat/SendMessage'
 import { conversationData } from '../../data/chat/conversationData'
 import { useState, useEffect, useRef } from 'react';
 
-import { getRecipeFromChefClaude, getRecipeFromMistral } from "../../data/chat/ai"
+import { getResponseFromMistral } from "../../data/chat/ai"
 
 import React from 'react'
 import { Link } from 'react-router-dom'
@@ -33,7 +33,7 @@ export default function AphroditeChat()
             {
                 try
                 {
-                    const initialGreeting = await getRecipeFromMistral("This is the initial greeting, I want you to greet me and ask something");
+                    const initialGreeting = await getResponseFromMistral("This is the initial greeting, I want you to greet me and ask something");
                     setConversation(prevConvo => [
                         ...prevConvo,
                         { category: 'AI', message: initialGreeting || "Hi there! How can I make your day better today? 😊" }
@@ -86,7 +86,7 @@ export default function AphroditeChat()
     {
         try
         {
-            const aiResponse = await getRecipeFromMistral(userMessage);
+            const aiResponse = await getResponseFromMistral(userMessage);
 
             setConversation(prevConvo => prevConvo.map((msg, index) =>
                 index === prevConvo.length - 1
@@ -140,6 +140,9 @@ export default function AphroditeChat()
                 className='border mt-4 bg-pink-500 text-white px-8 py-4 rounded-full hover:bg-pink-700 transition'>
                 <Link to='..'>Back</Link>
             </button>
+
+
+
         </div>
     );
 

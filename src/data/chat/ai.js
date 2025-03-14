@@ -11,7 +11,7 @@ Never mention that you're an AI—just be a fun, loving, and supportive partner!
 const hf = new HfInference(import.meta.env.VITE_HF_ACCESS_TOKEN);
 
 
-export async function getRecipeFromMistral(userMessage)
+export async function getResponseFromMistral(userMessage)
 {
     try
     {
